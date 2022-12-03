@@ -3,8 +3,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {useForm} from "react-hook-form";
-import {TextField, Button } from "@mui/material";
+import {TextField, Button, CircularProgress} from "@mui/material";
 import {IData} from "components/types";
+import {create} from "../../api";
+import {useOpen} from "../../hooks/useOpen";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -31,10 +33,23 @@ const defaults:IData = {
 
 export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
   const { register, handleSubmit,    formState: { errors } , reset } = useForm();
-  const onSubmit =( data:any )=> console.log(data);
+  const {isOpen:isSubmitting ,onOpen: onSubmitting,onClose:onFinishSubmit }=useOpen();
+  const onSubmit =( data:any )=> {
+    onSubmitting();
+    create(data).then((resp)=>{
+      console.log(resp)
+      onFinishSubmit();
+      // handleClose();
+    }).catch((error)=>{
+      onFinishSubmit();
+      console.log(error)
+    })
+
+  }
 
   const resetAll =()=>{
-    reset(defaults)
+    reset(defaults);
+    handleClose();
   }
   const titleError= errors.hasOwnProperty("title");
   const descriptionError= errors.hasOwnProperty("description");
@@ -84,16 +99,11 @@ export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
           helperText={linkError?"link is required":""}
           variant="filled"
         />
-      </Box>
-
+        </Box>
              <Box sx={{display:"grid" , gridTemplateColumns:"1fr 1fr" , gap:2}}>
-
                <Button onClick={resetAll} color={"error"} type={"button"} variant={"outlined"}> Cancel </Button>
-               <Button  type={"submit"} variant={"contained"}> Create </Button>
-
+               <Button  type={"submit"} variant={"contained"}>   {isSubmitting? <CircularProgress  color={"warning"} /> :"Create"}  </Button>
              </Box>
-
-
           </form>
         </Box>
       </Modal>

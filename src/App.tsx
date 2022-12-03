@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.scss';
 import {Index} from "components/home";
 import {Header} from "components/header/header";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
 
         </div>
         <img src={logo} className="logo2 logo" alt="react" />
-
+            <ToastContainer/>
     </div>
   );
 }

@@ -1,5 +1,7 @@
-import axios from "axios/index";
+
 import {IData} from "components/types";
+import axios from "axios";
+import {toast} from "react-toastify";
 
 const API = {
 	get:"http://code-libary-backend/get.php",
@@ -13,7 +15,11 @@ const config={
 }
 
 export const create = async (data:IData)=>{
-	axios.post("http://code-libary-backend/create.php",data , config).then((d)=>{
-		console.log(d.data)
+	return  axios.post(API.create,data , config).then((d)=>{
+		toast(d.status)
+	}).catch((e)=>{
+		toast.error(e.message)
+		console.log(e)
 	})
+
 }

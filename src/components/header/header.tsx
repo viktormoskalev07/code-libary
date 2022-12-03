@@ -17,7 +17,7 @@ const {isOpen , onClose , onOpen}=useOpen();
 		<Box sx={{ bgcolor: 'primary.light' , padding:1 ,display:"flex"  , gap:2}}>
 		<CreateModal handleClose={onClose} open={isOpen}/>
 			<TextField color={"warning"} sx={{flexGrow:1}}  onChange={searchHandler}  id="outlined-basic" label="Search" variant="outlined" />
-			<FormControlLabel control={<Checkbox defaultChecked />} label="Only title" />
+			<FormControlLabel  control={<Checkbox defaultChecked />} label="Only title" />
 			<Button  onClick={onOpen} size={"small"} variant="contained" >
 				<AddIcon/>
 			</Button >

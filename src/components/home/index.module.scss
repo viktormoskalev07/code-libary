@@ -3,6 +3,9 @@
 .grid{
 
   padding: 10px;
+  @include lg{
+    padding: 40px;
+  }
 
   @include md{
     gap: 20px;
