@@ -1,15 +1,11 @@
 import axios from "axios/index";
+import {IData} from "components/types";
 
 const API = {
 	get:"http://code-libary-backend/get.php",
 	create :"http://code-libary-backend/create.php"
 }
 
-interface IData {
-	title:string,
-	description:string,
-	link:string
-}
 
 
 const config={

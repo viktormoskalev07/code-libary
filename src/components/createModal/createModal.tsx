@@ -2,6 +2,9 @@ import React, {FC} from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import {useForm} from "react-hook-form";
+import {TextField, Button } from "@mui/material";
+import {IData} from "components/types";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -16,33 +19,85 @@ const style = {
 };
 
 
-interface IModal{
-  handleClose?:()=>boolean
-  open?:boolean
+type TModal={
+  handleClose:(  )=> void;
+  open:boolean;
+}
+const defaults:IData = {
+  title:"",
+  description:"",
+  link:""
 }
 
-export  const CreateModal:FC<IModal>= (handleClose  , open ) =>{
+export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
+  const { register, handleSubmit,    formState: { errors } , reset } = useForm();
+  const onSubmit =( data:any )=> console.log(data);
 
-const test = ( )=>{
-
-}
+  const resetAll =()=>{
+    reset(defaults)
+  }
+  const titleError= errors.hasOwnProperty("title");
+  const descriptionError= errors.hasOwnProperty("description");
+  const linkError= errors.hasOwnProperty("link");
   return (
     <div>
       <Modal
         open={open}
-        onClose={test}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onClose={handleClose}
+        aria-labelledby="modal-create"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+
+          <Typography sx={{marginBottom:3}}  variant="h6" component="h2">
+            create new item
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+        <Box   sx={{display:"grid"   , gap:3 , marginBottom:4}}>
+
+        <TextField
+          fullWidth
+          {...register("title", { required: true })}
+          error={titleError}
+          label="Title"
+          placeholder="type title"
+          helperText={titleError?"title is required":""}
+          variant="filled"
+        />
+        <TextField
+          fullWidth
+          {...register("description", { maxLength: 300 })}
+          error={descriptionError}
+          label="description"
+          placeholder="type description"
+          multiline
+          rows={4}
+
+          helperText={descriptionError?"maxLength is 400":""}
+          variant="filled"
+        />
+        <TextField
+          fullWidth
+          {...register("link", { required: true })}
+          error={linkError}
+          label="link"
+          placeholder="type description"
+          helperText={linkError?"link is required":""}
+          variant="filled"
+        />
+      </Box>
+
+             <Box sx={{display:"grid" , gridTemplateColumns:"1fr 1fr" , gap:2}}>
+
+               <Button onClick={resetAll} color={"error"} type={"button"} variant={"outlined"}> Cancel </Button>
+               <Button  type={"submit"} variant={"contained"}> Create </Button>
+
+             </Box>
+
+
+          </form>
         </Box>
       </Modal>
     </div>
   );
 }
+

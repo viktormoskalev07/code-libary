@@ -5,7 +5,7 @@ import styles from './card.module.scss'
 export const Card = () => {
 
 	return <div className={styles.card}>
-		<a target={"_blank"} href="https://fullcalendar.io/ ">
+		<a target={"_blank"}   rel="noreferrer"  href="https://fullcalendar.io/ ">
 
 
      <h2 className={styles.title}>
