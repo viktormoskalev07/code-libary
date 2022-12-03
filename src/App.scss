@@ -1,0 +1,53 @@
+.logo{
+    height: 50px;
+    width:50px ;
+        animation: rotate 5s 1s linear infinite;
+    position: relative;
+    transition:1s;
+    top: 0;
+
+    &:hover{
+    top:140px;
+
+    }
+}
+
+.logo1{
+    left:max(  calc( 50% - 750px ) , 0px  );
+    &:hover{
+        left:max(  calc(     50% - 650px ) , 0px  )
+    }
+}
+
+.logo2{
+    right:max(  calc( 50% - 750px ) , 0px  );
+    &:hover{
+        right:max(  calc(     50% - 650px ) , 0px  )
+    }
+}
+
+
+.app{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    background-color: #e3e3e3;
+    align-items: stretch;
+    min-height: 100%;
+}
+
+.container{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

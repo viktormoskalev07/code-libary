@@ -1,0 +1,25 @@
+@import "var";
+
+.card {
+    border:solid $primary 1px;
+    transition:0.2s;
+    padding: 10px;
+    *{
+        color:black;
+        text-decoration: none;
+    }
+    &:hover{
+        box-shadow: 1px 1px 10px   rgba($primary ,0.1) ;
+    }
+    &:active{
+        box-shadow: 1px 1px 15px inset  rgba($primary ,0.1) ;
+    }
+}
+.link{
+    text-decoration: underline;
+    color:$primary;
+    opacity: 0.9;
+    &:hover{
+        opacity: 1;
+    }
+}

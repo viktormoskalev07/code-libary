@@ -1,0 +1,17 @@
+@import "var";
+
+.grid{
+
+  padding: 10px;
+
+  @include md{
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  @include lg{
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 33.33% 33.33%;
+  }
+}
