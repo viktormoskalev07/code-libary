@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import styles from './index.module.scss'
 
 import {Card} from "components/home/card/card";

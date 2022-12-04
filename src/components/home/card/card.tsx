@@ -11,7 +11,7 @@ interface ICard extends IData{
 export const Card:FC<ICard> = ({title,description,link }) => {
 
 	return <div className={styles.card}>
-		<a target={"_blank"}   rel="noreferrer"  href="https://fullcalendar.io/ ">
+		<a target={"_blank"}   rel="noreferrer"  href={link}>
      <h2 className={styles.title}>
 		<span  dangerouslySetInnerHTML={{__html:title}}/>
 		 </h2>

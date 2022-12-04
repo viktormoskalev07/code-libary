@@ -4,8 +4,8 @@ import axios from "axios";
 import {toast} from "react-toastify";
 
 export const API = {
-	get:"http://code-libary-backend/code-libary/backend/get.php",
-	create :"http://code-libary-backend/code-libary/backend/create.php",
+	get:"https://tz.smart-ui.pro/backend-code-libary/get.php",
+	create :"https://tz.smart-ui.pro/backend-code-libary/create.php",
 
 }
 
