@@ -1,36 +1,5 @@
 <?php
-  
-$_POST = json_decode(file_get_contents("php://input"), true);
-$title= $_POST["title"] ;
-$description= $_POST["description"] ;
-$link= $_POST["link"] ;
 
-
-echo $title;
-echo $description;
-echo $link;
- 
-
-if(!$title) { 
-  return;
-}
-if(!$description) { 
-  return;
-}
-if(!$link) { 
-  return;
-}
-
-$data = file_get_contents('data.json');
-$list = json_decode($data, true);
- 
-   
- 
-  $list[]=$_POST;
-  
-  file_put_contents('data.json', json_encode($list));
- 
- 
  
 /**
  *  An example CORS-compliant method.  It will allow any GET, POST, or OPTIONS requests from any
@@ -65,7 +34,38 @@ $list = json_decode($data, true);
   
       exit(0);
   }
+    
+$_POST = json_decode(file_get_contents("php://input"), true);
+$title= $_POST["title"] ;
+$description= $_POST["description"] ;
+$link= $_POST["link"] ;
+
+
+echo $title;
+echo $description;
+echo $link;
+ 
+
+if(!$title) { 
+  return;
+}
+if(!$description) { 
+  return;
+}
+if(!$link) { 
+  return;
+}
+
+$data = file_get_contents('data.json');
+$list = json_decode($data, true);
+ 
+   
+ 
+  $list[]=$_POST;
   
+  file_put_contents('data.json', json_encode($list));
+ 
+ 
   
  
 return;

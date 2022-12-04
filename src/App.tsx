@@ -9,9 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="app">
-
         <img src={logo} className="logo1 logo" alt="react" />
-
         <div className="container">
           <Header/>
             <Index/>
