@@ -1,3 +1,21 @@
 .header {
+  :global{
 
+    .MuiInputBase-input{
+      color:white;
+      &::placeholder{
+        color:white;
+      }
+    }
+    .MuiInputLabel-formControl{
+      color:white;
+    }
+    .MuiFormControlLabel-label{
+      color:white;
+    }
+    .MuiSvgIcon-root{
+      color: white;
+    }
+
+  }
 }

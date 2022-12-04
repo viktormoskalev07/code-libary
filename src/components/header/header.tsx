@@ -14,7 +14,7 @@ export const Header = () => {
 
 const {isOpen , onClose , onOpen}=useOpen();
 	return <div className={styles.header}>
-		<Box sx={{ bgcolor: 'primary.light' , padding:1 ,display:"flex"  , gap:2}}>
+		<Box sx={{ bgcolor: 'primary.main' , padding:1 ,display:"flex"  , gap:2}}>
 		<CreateModal handleClose={onClose} open={isOpen}/>
 			<TextField color={"warning"} sx={{flexGrow:1}}  onChange={searchHandler}  id="outlined-basic" label="Search" variant="outlined" />
 			<FormControlLabel  control={<Checkbox defaultChecked />} label="Only title" />

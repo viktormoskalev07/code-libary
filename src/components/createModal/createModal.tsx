@@ -95,7 +95,7 @@ export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
           {...register("link", { required: true })}
           error={linkError}
           label="link"
-          placeholder="type description"
+          placeholder="https://example.com"
           helperText={linkError?"link is required":""}
           variant="filled"
         />
