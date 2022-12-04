@@ -15,7 +15,7 @@ const config={
 }
 
 export const create = async (data:IData)=>{
-	return  axios.post(API.create,data , config).then((d)=>{
+ axios.post(API.create,data , config).then((d)=>{
 		toast(d.status)
 	}).catch((e)=>{
 		toast.error(e.message)

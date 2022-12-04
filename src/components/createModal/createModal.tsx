@@ -5,8 +5,8 @@ import Modal from '@mui/material/Modal';
 import {useForm} from "react-hook-form";
 import {TextField, Button, CircularProgress} from "@mui/material";
 import {IData} from "components/types";
-import {create} from "../../api";
-import {useOpen} from "../../hooks/useOpen";
+import {create} from "api";
+import {useOpen} from "hooks/useOpen";
 
 const style = {
   position: 'absolute' as 'absolute',
