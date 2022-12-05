@@ -5,8 +5,9 @@ import Modal from '@mui/material/Modal';
 import {useForm} from "react-hook-form";
 import {TextField, Button, CircularProgress} from "@mui/material";
 import {IData} from "components/types";
-import {create} from "api";
+import {create, API} from "api";
 import {useOpen} from "hooks/useOpen";
+import {useSWRConfig} from "swr";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -34,12 +35,14 @@ const defaults:IData = {
 export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
   const { register, handleSubmit,    formState: { errors } , reset } = useForm();
   const {isOpen:isSubmitting ,onOpen: onSubmitting,onClose:onFinishSubmit }=useOpen();
+  const { mutate } = useSWRConfig()
   const onSubmit =( data:any )=> {
     onSubmitting();
-    create(data).then((resp)=>{
-      console.log(resp)
+    create(data).then(()=>{
       onFinishSubmit();
-      // handleClose();
+      mutate(API.get);
+      handleClose();
+
     }).catch((error)=>{
       onFinishSubmit();
       console.log(error)
@@ -49,7 +52,7 @@ export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
 
   const resetAll =()=>{
     reset(defaults);
-    handleClose();
+
   }
   const titleError= errors.hasOwnProperty("title");
   const descriptionError= errors.hasOwnProperty("description");
@@ -101,8 +104,9 @@ export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
         />
         </Box>
              <Box sx={{display:"grid" , gridTemplateColumns:"1fr 1fr" , gap:2}}>
-               <Button onClick={resetAll} color={"error"} type={"button"} variant={"outlined"}> Cancel </Button>
+               <Button onClick={()=>{resetAll() ; handleClose()}} color={"error"} type={"button"} variant={"outlined"}> Cancel </Button>
                <Button  type={"submit"} variant={"contained"}>   {isSubmitting? <CircularProgress  color={"warning"} /> :"Create"}  </Button>
+               <Button  onClick={resetAll} type={"submit"} variant={"contained"} color={"error"}>   reset </Button>
              </Box>
           </form>
         </Box>
