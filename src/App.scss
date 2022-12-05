@@ -1,8 +1,9 @@
+@import "var";
 .logo{
     height: 50px;
     width:50px ;
         animation: rotate 5s 1s linear infinite;
-    position: relative;
+    position: absolute;
     transition:1s;
     top: 0;
 
@@ -13,27 +14,35 @@
 }
 
 .logo1{
-    left:max(  calc( 50% - 750px ) , 0px  );
+    left:max(  calc( 50% - 750px ) , 10px  );
     &:hover{
-        left:max(  calc(     50% - 650px ) , 0px  )
+        left:max(  calc(     50% - 650px ) , 10px  )
     }
 }
 
 .logo2{
-    right:max(  calc( 50% - 750px ) , 0px  );
+    right:max(  calc( 50% - 750px ) , 10px  );
     &:hover{
-        right:max(  calc(     50% - 650px ) , 0px  )
+        right:max(  calc(     50% - 650px ) , 10px  )
     }
 }
 
 
 .app{
+    padding:0 70px;
     width: 100%;
     overflow: hidden;
     display: flex;
     background-color: #e3e3e3;
     align-items: stretch;
     min-height: 100%;
+}
+h1{
+    font-size: 34px;
+    text-align: center;
+    @include md{
+        font-size: 54px;
+    }
 }
 
 .container{

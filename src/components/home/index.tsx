@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styles from './index.module.scss'
 
 import {Card} from "components/home/card/card";
-import {Typography, CircularProgress} from "@mui/material";
+import {   CircularProgress} from "@mui/material";
 
 import axios from "axios";
 import {API} from "api";
@@ -17,10 +17,10 @@ export const Index:FC = () => {
     const { data, error } = useSWR(API.get, fetcher , {errorRetryInterval:60*60*60});
 
     return (
-      <div>
-        <Typography margin={2} variant="h1" textAlign={"center"} component="h2">
-            Code library
-        </Typography>
+      <div className={styles.home}>
+       <h1>
+         Code library
+       </h1>
             <DataGrid error={error} data={data}/>
       </div>
 
