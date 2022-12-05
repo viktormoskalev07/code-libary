@@ -5,20 +5,20 @@
     transition:0.2s;
     padding: 10px;
     *{
+
         color:black;
         text-decoration: none;
     }
-    &:hover{
-        box-shadow: 1px 1px 10px   rgba($primary ,0.1) ;
-    }
-    &:active{
-        box-shadow: 1px 1px 15px inset  rgba($primary ,0.1) ;
-    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 .link{
     text-decoration: underline;
     color:$primary;
     opacity: 0.9;
+    word-wrap:break-word;
     &:hover{
         opacity: 1;
     }
