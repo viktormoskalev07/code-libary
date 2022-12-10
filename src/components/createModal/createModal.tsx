@@ -1,13 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {useForm} from "react-hook-form";
 import {TextField, Button, CircularProgress} from "@mui/material";
 import {IData} from "components/types";
-import {create, API} from "api";
+import {create, API, TApiType} from "api";
 import {useOpen} from "hooks/useOpen";
 import {useSWRConfig} from "swr";
+import {SelectType} from "components/createModal/select/select";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -18,7 +19,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 2  ,
 };
 
 
@@ -33,12 +34,13 @@ const defaults:IData = {
 }
 
 export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
+  const [type , setType] = useState<TApiType>("code");
   const { register, handleSubmit,    formState: { errors } , reset } = useForm();
   const {isOpen:isSubmitting ,onOpen: onSubmitting,onClose:onFinishSubmit }=useOpen();
   const { mutate } = useSWRConfig()
   const onSubmit =( data:any )=> {
     onSubmitting();
-    create(data).then(()=>{
+    create(data , type).then(()=>{
       onFinishSubmit();
       mutate(API.get);
       handleClose();
@@ -52,11 +54,11 @@ export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
 
   const resetAll =()=>{
     reset(defaults);
-
   }
   const titleError= errors.hasOwnProperty("title");
   const descriptionError= errors.hasOwnProperty("description");
   const linkError= errors.hasOwnProperty("link");
+
   return (
     <div>
       <Modal
@@ -65,13 +67,12 @@ export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
         aria-labelledby="modal-create"
       >
         <Box sx={style}>
-
-          <Typography sx={{marginBottom:3}}  variant="h6" component="h2">
+          <Typography sx={{marginBottom:2}}  variant="h6" component="h2">
             create new item
           </Typography>
+          <SelectType setState={setType} state={type}/>
           <form onSubmit={handleSubmit(onSubmit)}>
-        <Box   sx={{display:"grid"   , gap:3 , marginBottom:4}}>
-
+        <Box   sx={{display:"grid"   , gap:2 , marginBottom:2}}>
         <TextField
           fullWidth
           {...register("title", { required: true })}
@@ -88,7 +89,7 @@ export  const CreateModal:FC<TModal>= ({handleClose  , open} ) =>{
           label="description"
           placeholder="type description"
           multiline
-          rows={4}
+          rows={2}
 
           helperText={descriptionError?"maxLength is 400":""}
           variant="filled"

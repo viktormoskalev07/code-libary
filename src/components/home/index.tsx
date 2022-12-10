@@ -1,57 +1,28 @@
 import React, {FC} from 'react';
 import styles from './index.module.scss'
 
-import {Card} from "components/home/card/card";
-import {   CircularProgress} from "@mui/material";
-
 import axios from "axios";
 import {API} from "api";
 import useSWR from 'swr'
-import {IData} from "components/types";
-import {toast} from "react-toastify";
+
+import {DataGrid} from "components/home/dataGrid/dataGrid";
+import   {TabsWrapper} from "components/tabs/tabs";
 
 const fetcher = (url:string) => axios.get(url).then(res => res.data)
 
 export const Index:FC = () => {
 
     const { data, error } = useSWR(API.get, fetcher , {errorRetryInterval:60*60*60});
+    const { data:dataCourses, error:errorCourses } = useSWR(API.courses.get, fetcher , {errorRetryInterval:60*60*60});
 
     return (
       <div className={styles.home}>
        <h1>
-         Code library
+         Smart library
        </h1>
-            <DataGrid error={error} data={data}/>
-      </div>
-
-    );
-}
-
-  type TDataArr ={
-    data?:IData[]
-      error: {message:string}
-}
-
-const DataGrid:FC<TDataArr>=({data , error})=>{
-
-    if(error){
-      toast.error(error.message);
-      toast.error(API.get);
-      return <h2 style={{marginTop:80 , textAlign:"center"}}> {error.message}</h2>
-    }
-    if(!data){
-        return <div style={{display: "flex" , height:200, width:"100%" , justifyContent:"center" , alignItems:"center"}}>
-            <CircularProgress   />
-
+        <div style={{padding:"0 40px"}}>
+          <TabsWrapper Tab1={ <DataGrid error={error} data={data}/>}  Tab2={<DataGrid error={errorCourses} data={dataCourses}/>}/>
         </div>
-    }
-  if(typeof data === "object"&&data.length>0){
-    return <div className={styles.grid}>
-      {data.map((item, i)=>{
-        return  <Card key={i} {...item} />
-      })}
-
-    </div>
-  }
- return <></>
+      </div>
+    );
 }

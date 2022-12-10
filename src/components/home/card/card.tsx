@@ -11,17 +11,13 @@ interface ICard extends IData{
 export const Card:FC<ICard> = ({title,description,link }) => {
 
 	return <div className={styles.card}>
-
      <h2 className={styles.title}>
 		<span  dangerouslySetInnerHTML={{__html:title}}/>
 		 </h2>
-		<p className={styles.desc}> </p>
-		  <span  dangerouslySetInnerHTML={{__html:description}}/>
+		  <div className={styles.description}  dangerouslySetInnerHTML={{__html:description}}/>
 		<br/>
 		<a target={"_blank"}   rel="noreferrer"  href={link}>
-
 			link : <span className={styles.link}> {link }  </span>
-
 		</a>
 	</div>
 };
